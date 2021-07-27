@@ -38,80 +38,78 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: BlocListener<CounterCubit, CounterState>(
-        listener: (context, state) {
-          if (state.wasIncremented!)
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Counter incremented"),
-                duration: Duration(milliseconds: 500),
-              ),
-            );
-          else
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Counter decremented"),
-                duration: Duration(milliseconds: 500),
-              ),
-            );
-        },
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'You have pushed the button this many times:',
-              ),
-              BlocBuilder<CounterCubit, CounterState>(
-                builder: (context, state) {
-                  if (state.counterValue == 0) {
-                    return Text(
-                      "Could it be nothing?",
-                      style: Theme.of(context).textTheme.headline4,
-                    );
-                  }
-                  if (state.counterValue < 0) {
-                    return Text(
-                      "🧐 " + state.counterValue.toString(),
-                      style: Theme.of(context).textTheme.headline4,
-                    );
-                  }
-                  if (state.counterValue % 5 == 0) {
-                    return Text(
-                      "Hmm, Multiple of 5!!",
-                      style: Theme.of(context).textTheme.headline4,
-                    );
-                  }
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            BlocConsumer<CounterCubit, CounterState>(
+              listener: (context, state) {
+                if (state.wasIncremented!)
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Counter incremented"),
+                      duration: Duration(milliseconds: 500),
+                    ),
+                  );
+                else
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Counter decremented"),
+                      duration: Duration(milliseconds: 500),
+                    ),
+                  );
+              },
+              builder: (context, state) {
+                if (state.counterValue == 0) {
                   return Text(
-                    (state.counterValue % 2 == 0 ? "Even: " : "Odd: ") +
-                        state.counterValue.toString(),
+                    "Could it be nothing?",
                     style: Theme.of(context).textTheme.headline4,
                   );
-                },
-              ),
-              Row(
-                children: [
-                  Spacer(flex: 2),
-                  FloatingActionButton(
-                    onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).decrement();
-                    },
-                    tooltip: 'Decrement',
-                    child: Icon(Icons.remove),
-                  ),
-                  Spacer(),
-                  FloatingActionButton(
-                    onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).increment();
-                    },
-                    tooltip: 'Increment',
-                    child: Icon(Icons.add),
-                  ),
-                  Spacer(flex: 2),
-                ],
-              ),
-            ],
-          ),
+                }
+                if (state.counterValue < 0) {
+                  return Text(
+                    "🧐 " + state.counterValue.toString(),
+                    style: Theme.of(context).textTheme.headline4,
+                  );
+                }
+                if (state.counterValue % 5 == 0) {
+                  return Text(
+                    "Hmm, Multiple of 5!!",
+                    style: Theme.of(context).textTheme.headline4,
+                  );
+                }
+                return Text(
+                  (state.counterValue % 2 == 0 ? "Even: " : "Odd: ") +
+                      state.counterValue.toString(),
+                  style: Theme.of(context).textTheme.headline4,
+                );
+              },
+            ),
+            Row(
+              children: [
+                Spacer(flex: 2),
+                FloatingActionButton(
+                  onPressed: () {
+                    BlocProvider.of<CounterCubit>(context).decrement();
+                  },
+                  tooltip: 'Decrement',
+                  child: Icon(Icons.remove),
+                ),
+                Spacer(),
+                FloatingActionButton(
+                  onPressed: () {
+                    BlocProvider.of<CounterCubit>(context).increment();
+                  },
+                  tooltip: 'Increment',
+                  child: Icon(Icons.add),
+                ),
+                Spacer(flex: 2),
+              ],
+            ),
+          ],
         ),
       ),
     );
