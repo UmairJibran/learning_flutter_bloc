@@ -97,37 +97,13 @@ class _MyHomePageState extends State<MyHomePage> {
             TextButton(
               child: Text("Navigate to Second Screen"),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext materialPageRouteCountext) =>
-                        BlocProvider.value(
-                      value: BlocProvider.of<CounterCubit>(context),
-                      child: SecondScreen(
-                        title: "Second Screen",
-                        color: Colors.cyan,
-                      ),
-                    ),
-                  ),
-                );
+                Navigator.pushNamed(context, SecondScreen.routeName);
               },
             ),
             TextButton(
               child: Text("Navigate to Third Screen"),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext materialPageRouteCountext) =>
-                        BlocProvider.value(
-                      value: BlocProvider.of<CounterCubit>(context),
-                      child: ThirdScreen(
-                        title: "Third Screen",
-                        color: Colors.indigoAccent,
-                      ),
-                    ),
-                  ),
-                );
+                Navigator.pushNamed(context, ThirdScreen.routeName);
               },
             ),
             Spacer(flex: 4),
