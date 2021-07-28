@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../business_logic/cubit/counter_cubit.dart';
 
 class ThirdScreen extends StatefulWidget {
-  static final String routeName = "/third-screen";
+  static const String routeName = "/third-screen";
 
   ThirdScreen({
     Key? key,

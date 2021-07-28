@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../business_logic/cubit/counter_cubit.dart';
 
 class SecondScreen extends StatefulWidget {
-  static final String routeName = "/second-screen";
+  static const String routeName = "/second-screen";
 
   SecondScreen({
     Key? key,
