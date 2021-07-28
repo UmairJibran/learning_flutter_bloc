@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learning_flutter_bloc/constants/enums.dart';
+import '../../business_logic/cubit/internet_cubit.dart';
 import '../../business_logic/cubit/counter_cubit.dart';
 import 'second_screen.dart';
 import 'third_screen.dart';
@@ -25,6 +27,66 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Spacer(flex: 4),
+            BlocBuilder<InternetCubit, InternetState>(builder: (_, state) {
+              if (state is InternetConnected &&
+                  state.connectionType == ConnectionType.Wifi) {
+                return Column(
+                  children: [
+                    Icon(
+                      Icons.wifi,
+                      color: Colors.blue,
+                      size: 40,
+                    ),
+                    Text(
+                      "WI-FI",
+                      style: TextStyle(
+                        fontSize: 28,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ],
+                );
+              } else if (state is InternetConnected &&
+                  state.connectionType == ConnectionType.Mobile) {
+                return Column(
+                  children: [
+                    Icon(
+                      Icons.lte_mobiledata,
+                      color: Colors.green,
+                      size: 40,
+                    ),
+                    Text(
+                      "Mobile Data",
+                      style: TextStyle(
+                        fontSize: 28,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
+                );
+              } else if (state is InternetDisconnected) {
+                return Column(
+                  children: [
+                    Icon(
+                      Icons.signal_wifi_connected_no_internet_4_sharp,
+                      color: Colors.red,
+                      size: 40,
+                    ),
+                    Text(
+                      "Not Connected",
+                      style: TextStyle(
+                        fontSize: 28,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }),
+            Spacer(),
             Text(
               'You have pushed the button this many times:',
             ),
