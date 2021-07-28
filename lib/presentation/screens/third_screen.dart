@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../business_logic/cubit/counter_cubit.dart';
-import 'second_screen.dart';
-import 'third_screen.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+class ThirdScreen extends StatefulWidget {
+  static final String routeName = "/third-screen";
+
+  ThirdScreen({
+    Key? key,
+    required this.title,
+    required this.color,
+  }) : super(key: key);
 
   final String title;
+  final Color color;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ThirdScreenState createState() => _ThirdScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ThirdScreenState extends State<ThirdScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: widget.color,
       ),
       body: Center(
         child: Column(
@@ -81,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   tooltip: 'Decrement',
                   child: Icon(Icons.remove),
+                  backgroundColor: widget.color,
                 ),
                 Spacer(),
                 FloatingActionButton(
@@ -89,45 +96,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   tooltip: 'Increment',
                   child: Icon(Icons.add),
+                  backgroundColor: widget.color,
                 ),
                 Spacer(flex: 2),
               ],
             ),
             Spacer(),
             TextButton(
-              child: Text("Navigate to Second Screen"),
+              child: Text(
+                "Navigate to Home Screen",
+                style: TextStyle(
+                  color: widget.color,
+                ),
+              ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext materialPageRouteCountext) =>
-                        BlocProvider.value(
-                      value: BlocProvider.of<CounterCubit>(context),
-                      child: SecondScreen(
-                        title: "Second Screen",
-                        color: Colors.cyan,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            TextButton(
-              child: Text("Navigate to Third Screen"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext materialPageRouteCountext) =>
-                        BlocProvider.value(
-                      value: BlocProvider.of<CounterCubit>(context),
-                      child: ThirdScreen(
-                        title: "Third Screen",
-                        color: Colors.indigoAccent,
-                      ),
-                    ),
-                  ),
-                );
+                Navigator.pop(context);
               },
             ),
             Spacer(flex: 4),
