@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../business_logic/cubit/counter_cubit.dart';
-import 'second_screen.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+class SecondScreen extends StatefulWidget {
+  SecondScreen({
+    Key? key,
+    required this.title,
+    required this.color,
+  }) : super(key: key);
 
   final String title;
+  final Color color;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _SecondScreenState createState() => _SecondScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SecondScreenState extends State<SecondScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: widget.color,
       ),
       body: Center(
         child: Column(
@@ -80,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   tooltip: 'Decrement',
                   child: Icon(Icons.remove),
+                  backgroundColor: widget.color,
                 ),
                 Spacer(),
                 FloatingActionButton(
@@ -88,27 +94,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   tooltip: 'Increment',
                   child: Icon(Icons.add),
+                  backgroundColor: widget.color,
                 ),
                 Spacer(flex: 2),
               ],
             ),
             Spacer(),
             TextButton(
-              child: Text("Navigate to Second Screen"),
+              child: Text(
+                "Navigate to Home Screen",
+                style: TextStyle(
+                  color: widget.color,
+                ),
+              ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext materialPageRouteCountext) =>
-                        BlocProvider.value(
-                      value: BlocProvider.of<CounterCubit>(context),
-                      child: SecondScreen(
-                        title: "Second Screen",
-                        color: Colors.cyan,
-                      ),
-                    ),
-                  ),
-                );
+                Navigator.pop(context);
               },
             ),
             Spacer(flex: 4),
